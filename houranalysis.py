@@ -4,7 +4,7 @@ from os.path import exists
 import csv
 import dayanalysis
 import binanceprovider
-import rules
+import rules.rules as rules
 
 def avaliable(coin):
     #df = binanceprovider.get_candles_hour(coin)

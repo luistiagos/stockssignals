@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import indicators
 import plots
+import datetime
 
 #Data Source
 import yfinance as yf
@@ -98,7 +99,11 @@ def is_cross_ma_dow(df, size=1):
 #    return df.iloc[size]['PositionCrossMA'] == -1
 
 def get_coins(tick='ETC-USD', period='1000h', interval='1h', period_stocifr=21):
-    df = yf.download(tickers=tick, period = period, interval = interval)
+    #df = yf.download(tickers=tick, period = period, interval = interval)
+    dt = datetime.datetime.today() + datetime.timedelta(hours=4)
+    fromDate = str((dt - datetime.timedelta(hours=200)).strftime('%Y-%m-%d'))
+    toDate = str(dt.strftime('%Y-%m-%d'))
+    df = yf.download([tick], start=fromDate, end=toDate, interval = "1h")
     df = df.rename(columns={"Open":"open", "Close":"close", "Adj Close":"adj close", "Low":"low", "High":"high"})
     df['change'] = df['close'].pct_change() * 100
     df['change7p'] = df['close'].pct_change(periods=7) * 100
@@ -124,7 +129,9 @@ def get_coins(tick='ETC-USD', period='1000h', interval='1h', period_stocifr=21):
     return df
 
 
-#df = get_coins('PI-USD', '200h', '1h')
+df = get_coins('BTC-USD', '1000h', '1h')
+print(len(df))
+print(df.iloc[-2]['close'])
 #print(is_triangle_up(df, 'PI-USD'))
 #plots.plot_cross_ma(df)
 #print(df.iloc[-1]['open'])

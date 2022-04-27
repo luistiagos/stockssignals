@@ -3,7 +3,7 @@ import houranalysis
 import fiveteenminanalysis
 import binanceprovider
 import repository
-import rules
+import rules.rules as rules
 import talib as ta
 import provider
 import plots

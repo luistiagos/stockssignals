@@ -18,12 +18,14 @@ def load_coins(filename):
             coins.add(item[0])
     return coins
 
-def store_analysis(coins, filename):
+def remove_file(filename):
     if os.path.exists(filename):
         os.remove(filename)
+
+def store_analysis(data, filename):
     with open(filename, 'a', newline='', encoding='UTF8') as f:
-        writer = csv.writer(f)
-        for item in coins:
-            arr = [item, 'https://finance.yahoo.com/quote/' + str(item) + '/chart?p=' + str(item)]
+        writer = csv.writer(f,  delimiter=';')
+        for item in data:
+            arr = item
             writer.writerow(arr)
 

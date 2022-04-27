@@ -26,6 +26,7 @@ def patterns_names():
     names = get_talib_candlestick_patterns()
     names.append('BEARISH_123')
     names.append('BULLISH_123')
+    return names
 
 def candle_patterns(df):
     patterns = get_talib_candlestick_patterns()

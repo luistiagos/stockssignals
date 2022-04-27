@@ -1,6 +1,6 @@
 import repository
 import binanceprovider
-import rules
+import rules.rules as rules
 from datetime import datetime
 
 def avaliable(coin):
@@ -14,7 +14,6 @@ def analysis(coins):
             filtered_coins.add(coin)
     if len(filtered_coins) > 0:
         repository.store_analysis(filtered_coins, 'daycoins.csv')
-
 
 def run():
     coins = repository.load_coins('bcoins.csv')
